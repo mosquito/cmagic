@@ -32,7 +32,7 @@ jobs:
         env:
           TOXENV: ${{ matrix.linter }}
         with:
-          args: tox
+          args: apt-install libmagic-dev && tox
 
   tests:
     needs: lint
