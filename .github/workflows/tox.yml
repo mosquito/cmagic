@@ -59,5 +59,6 @@ jobs:
           TOXENV: ${{ matrix.toxenv }}
           AMQP_URL: amqp://guest:guest@rabbitmq
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          MAGIC: /usr/lib/file/magic.mgc
         with:
           args: bash -c "apt-install libmagic-dev && tox"

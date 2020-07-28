@@ -33,7 +33,9 @@ Ubuntu/Debian
 
 .. code-block:: bash
 
-   apt-get install -y libmagic-dev
+   apt-get install -y libmagic1 libmagic-mgc   # when using manilinux wheel
+   apt-get install -y libmagic-dev             # for building from sources
+   python3 -m pip install cmagic
 
 
 Centos
@@ -41,14 +43,15 @@ Centos
 
 .. code-block:: bash
 
-   yum install -y file-devel
+   yum install -y file-libs            # when using manilinux wheel
+   yum install -y file-devel           # for building from sources
+   python3 -m pip install cmagic
 
 
-Macos
+MacOS
 +++++
 
 .. code-block:: bash
 
    brew install libmagic
-
-
+   python3 -m pip install cmagic
