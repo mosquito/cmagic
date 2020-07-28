@@ -31,6 +31,7 @@ jobs:
         uses: docker://snakepacker/python:all
         env:
           TOXENV: ${{ matrix.linter }}
+          MAGIC: /usr/lib/file/magic.mgc
         with:
           args: bash -c "apt-install libmagic-dev && tox"
 
