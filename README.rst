@@ -1,10 +1,6 @@
 cmagic
 ======
 
-.. image:: https://coveralls.io/repos/github/mosquito/cmagic/badge.svg?branch=master
-    :target: https://coveralls.io/github/mosquito/cmagic
-    :alt: Coveralls
-
 .. image:: https://github.com/mosquito/cmagic/workflows/tox/badge.svg
     :target: https://github.com/mosquito/cmagic/actions?query=workflow%3Atox
     :alt: Github Actions
