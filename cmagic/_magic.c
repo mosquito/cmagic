@@ -134,7 +134,7 @@ static PyObject* Magic_set_flags(Magic *self, PyObject* args,  PyObject *kwds) {
 
 static PyObject* Magic_load(Magic *self, PyObject *args, PyObject *kwds) {
     static char *kwlist[] = { "db_path", NULL };
-    char *db_path;
+    char *db_path = NULL;
 
     if (!PyArg_ParseTupleAndKeywords(
         args, kwds, "|s", kwlist, &db_path
@@ -180,7 +180,7 @@ static PyObject* Magic_check(Magic *self, PyObject *args, PyObject *kwds) {
 
 static PyObject* Magic_compile(Magic *self, PyObject *args, PyObject *kwds) {
     static char *kwlist[] = { "db_path", NULL };
-    char *db_path;
+    char *db_path = NULL;
 
     if (!PyArg_ParseTupleAndKeywords(
         args, kwds, "|s", kwlist, &db_path
