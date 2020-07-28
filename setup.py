@@ -31,7 +31,7 @@ setup(
         module_name: [
             "{}/_magic.pyi".format(module_name),
             "{}/magic.mgc".format(module_name),
-            "py.typed",
+            "{}/py.typed".format(module_name),
         ],
     },
     project_urls={
