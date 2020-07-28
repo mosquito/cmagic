@@ -23,3 +23,32 @@ cmagic
     :target: https://pypi.python.org/pypi/cmagic/
 
 Python wrapper for libmagic.
+
+
+Installation
+------------
+
+Ubuntu/Debian
++++++++++++++
+
+.. code-block:: bash
+
+   apt-get install -y libmagic-dev
+
+
+Centos
+++++++
+
+.. code-block:: bash
+
+   yum install -y file-devel
+
+
+Macos
++++++
+
+.. code-block:: bash
+
+   brew install libmagic
+
+
