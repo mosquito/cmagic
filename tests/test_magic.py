@@ -9,4 +9,4 @@ def test_magic():
 
     m.load()
 
-    assert "executable" in m.guess_file("/bin/sh")
+    assert "ASCII text" in m.guess_file("/etc/hosts")

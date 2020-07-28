@@ -48,7 +48,7 @@ Usage
    m.load()
 
    m.guess_file("/bin/sh")
-   # '... executable ...'
+   # 'ASCII text'
 
 
 
