@@ -30,6 +30,7 @@ setup(
     package_data={
         module_name: [
             "{}/_magic.pyi".format(module_name),
+            "{}/magic.mgc".format(module_name),
             "py.typed",
         ],
     },

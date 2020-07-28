@@ -1,3 +1,4 @@
 include cmagic/*.pyi
+include cmagic/magic.mgc
 include cmagic/py.typed
 include README.rst

@@ -27,25 +27,16 @@ Python wrapper for libmagic.
 Usage
 -----
 
-.. code-block::
-
-   # MacOS
-   $ export MAGIC=/usr/local/Cellar/libmagic/5.39/share/misc/magic.mgc
-
-   # Ubuntu
-   $ export MAGIC=/usr/lib/file/magic.mgc
-
 .. code-block:: python
 
    import cmagic
 
    m = cmagic.Magic()
 
-   if m.check("/usr/lib/file/magic.mgc"):
+   if m.check(cmagic.MAGIC_DB):
       print("Database is ok")
 
-   # Default DB from MAGIC environment variable
-   m.load()
+   m.load(cmagic.MAGIC_DB)
 
    m.guess_file("/bin/sh")
    # 'ASCII text'
@@ -60,8 +51,8 @@ Ubuntu/Debian
 
 .. code-block:: bash
 
-   apt-get install -y libmagic1 libmagic-mgc   # when using manilinux wheel
-   apt-get install -y libmagic-dev             # for building from sources
+   apt-get install -y libmagic1        # when using manilinux wheel
+   apt-get install -y libmagic-dev     # for building from sources
    python3 -m pip install cmagic
 
 
