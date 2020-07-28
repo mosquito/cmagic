@@ -27,6 +27,14 @@ Python wrapper for libmagic.
 Usage
 -----
 
+.. code-block::
+
+   # MacOS
+   $ export MAGIC=/usr/local/Cellar/libmagic/5.39/share/misc/magic.mgc
+
+   # Ubuntu
+   $ export MAGIC=/usr/lib/file/magic.mgc
+
 .. code-block:: python
 
    import cmagic
@@ -36,7 +44,8 @@ Usage
    if m.check("/usr/lib/file/magic.mgc"):
       print("Database is ok")
 
-   m.load("/usr/lib/file/magic.mgc")
+   # Default DB from MAGIC environment variable
+   m.load()
 
    m.guess_file("/bin/sh")
    # '... executable ...'
