@@ -1,0 +1,3 @@
+include cmagic/*.pyi
+include cmagic/py.typed
+include README.rst
