@@ -24,6 +24,24 @@ cmagic
 
 Python wrapper for libmagic.
 
+Usage
+-----
+
+.. code-block:: python
+
+   import cmagic
+
+   m = cmagic.Magic()
+
+   if m.check("/usr/lib/file/magic.mgc"):
+      print("Database is ok")
+
+   m.load("/usr/lib/file/magic.mgc")
+
+   m.guess_file("/bin/sh")
+   # '... executable ...'
+
+
 
 Installation
 ------------

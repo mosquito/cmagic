@@ -140,6 +140,8 @@ static PyObject* Magic_load(Magic *self, PyObject *args, PyObject *kwds) {
         args, kwds, "|s", kwlist, &db_path
     )) return NULL;
 
+    if (db_path == NULL) db_path = getenv("MAGIC");
+
     int result;
 
     Py_BEGIN_ALLOW_THREADS;
@@ -157,13 +159,15 @@ static PyObject* Magic_load(Magic *self, PyObject *args, PyObject *kwds) {
 
 static PyObject* Magic_check(Magic *self, PyObject *args, PyObject *kwds) {
     static char *kwlist[] = { "db_path", NULL };
-    char *db_path;
+    char *db_path = NULL;
 
     if (!PyArg_ParseTupleAndKeywords(
         args, kwds, "|s", kwlist, &db_path
     )) return NULL;
 
     int result;
+
+    if (db_path == NULL) db_path = getenv("MAGIC");
 
     Py_BEGIN_ALLOW_THREADS;
     result = magic_check(self->cookie, db_path);
@@ -181,6 +185,8 @@ static PyObject* Magic_compile(Magic *self, PyObject *args, PyObject *kwds) {
     if (!PyArg_ParseTupleAndKeywords(
         args, kwds, "|s", kwlist, &db_path
     )) return NULL;
+
+    if (db_path == NULL) db_path = getenv("MAGIC");
 
     int result;
 
