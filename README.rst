@@ -42,7 +42,7 @@ Usage
 
    m.load()
 
-   m.guess_file("/bin/sh")
+   m.guess_file("/etc/hosts")
    # 'ASCII text'
 
 
