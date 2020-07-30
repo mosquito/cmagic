@@ -33,6 +33,7 @@ setup(
             "{}/py.typed".format(module_name),
         ],
     },
+    url="https://github.com/mosquito/cmagic/",
     project_urls={
         "Documentation": "https://github.com/mosquito/cmagic/",
         "Source": "https://github.com/mosquito/cmagic/",
