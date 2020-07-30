@@ -1,6 +1,9 @@
 cmagic
 ======
 
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+   :target: https://saythanks.io/to/me@mosquito.su
+
 .. image:: https://github.com/mosquito/cmagic/workflows/tox/badge.svg
     :target: https://github.com/mosquito/cmagic/actions?query=workflow%3Atox
     :alt: Github Actions

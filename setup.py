@@ -35,7 +35,9 @@ setup(
     },
     project_urls={
         "Documentation": "https://github.com/mosquito/cmagic/",
-        "Source": "https://github.com/mosquito/cmagic",
+        "Source": "https://github.com/mosquito/cmagic/",
+        "Tracker": "https://github.com/mosquito/cmagic/issues",
+        "Say Thanks!": "https://saythanks.io/to/me%40mosquito.su",
     },
     packages=[module_name],
     classifiers=[
