@@ -105,7 +105,7 @@ def test_asyncio():
 DATA_FILES = Path(__file__).parent.resolve() / "data"
 
 
-def test_extensions(magic):
+def test_data_file_samples(magic):
     magic.set_flags(mime_type=True)
 
     pdf = str(DATA_FILES / "libmagic.pdf")
@@ -124,3 +124,28 @@ def test_extensions(magic):
     assert 'ASCII text' in magic.guess_file(txt)
     assert 'ELF 64-bit LSB' in magic.guess_file(elf)
     assert 'Mach-O 64-bit' in magic.guess_file(marcho)
+
+
+def test_data_file_samples_bytes(magic):
+    magic.set_flags(mime_type=True)
+
+    pdf = str(DATA_FILES / "libmagic.pdf")
+    txt = str(DATA_FILES / "libmagic.txt")
+    elf = str(DATA_FILES / "linux.bin")
+    marcho = str(DATA_FILES / "macos.bin")
+
+    def opener(fname):
+        with open(fname, "rb") as fp:
+            return fp.read(16 * 1024)
+
+    assert magic.guess_bytes(opener(pdf)) == 'application/pdf'
+    assert magic.guess_bytes(opener(txt)) == 'text/plain'
+    assert magic.guess_bytes(opener(elf)) == 'application/x-sharedlib'
+    assert magic.guess_bytes(opener(marcho)) == 'application/x-mach-binary'
+
+    magic.set_flags(mime_type=False)
+
+    assert 'PDF document' in magic.guess_bytes(opener(pdf))
+    assert 'ASCII text' in magic.guess_bytes(opener(txt))
+    assert 'ELF 64-bit LSB' in magic.guess_bytes(opener(elf))
+    assert 'Mach-O 64-bit' in magic.guess_bytes(opener(marcho))
