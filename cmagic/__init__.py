@@ -1,8 +1,9 @@
 from glob import glob
 from itertools import chain
 
-from .version import __author__, __version__        # NOQA
-from ._magic import Magic                           # NOQA
+from .version import __author__, __version__
+from ._magic import Magic
+
 
 def find_db():
     candidates = list(
