@@ -115,7 +115,9 @@ def test_data_file_samples(magic):
 
     assert magic.guess_file(pdf) == 'application/pdf'
     assert magic.guess_file(txt) == 'text/plain'
-    assert magic.guess_file(elf) == 'application/x-pie-executable'
+    assert magic.guess_file(elf) in (
+        'application/x-pie-executable', 'application/x-sharedlib'
+    )
     assert magic.guess_file(marcho) == 'application/x-mach-binary'
 
     magic.set_flags(mime_type=False)
