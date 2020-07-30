@@ -118,3 +118,9 @@ def test_extensions(magic):
     assert magic.guess_file(elf) == 'application/x-pie-executable'
     assert magic.guess_file(marcho) == 'application/x-mach-binary'
 
+    magic.set_flags(mime_type=False)
+
+    assert 'PDF document' in magic.guess_file(pdf)
+    assert 'ASCII text' in magic.guess_file(txt)
+    assert 'ELF 64-bit LSB' in magic.guess_file(elf)
+    assert 'Mach-O 64-bit' in magic.guess_file(marcho)
