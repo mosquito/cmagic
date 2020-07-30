@@ -1,0 +1,285 @@
+
+LIBMAGIC(3)              BSD Library Functions Manual              LIBMAGIC(3)
+
+NNAAMMEE
+     mmaaggiicc__ooppeenn, mmaaggiicc__cclloossee, mmaaggiicc__eerrrroorr, mmaaggiicc__eerrrrnnoo, mmaaggiicc__ddeessccrriippttoorr,
+     mmaaggiicc__bbuuffffeerr, mmaaggiicc__ggeettffllaaggss, mmaaggiicc__sseettffllaaggss, mmaaggiicc__cchheecckk, mmaaggiicc__ccoommppiillee,
+     mmaaggiicc__lliisstt, mmaaggiicc__llooaadd, mmaaggiicc__llooaadd__bbuuffffeerrss, mmaaggiicc__sseettppaarraamm,
+     mmaaggiicc__ggeettppaarraamm, mmaaggiicc__vveerrssiioonn -- Magic number recognition library
+
+LLIIBBRRAARRYY
+     Magic Number Recognition Library (libmagic, -lmagic)
+
+SSYYNNOOPPSSIISS
+     ##iinncclluuddee <<mmaaggiicc..hh>>
+
+     _m_a_g_i_c___t
+     mmaaggiicc__ooppeenn(_i_n_t _f_l_a_g_s);
+
+     _v_o_i_d
+     mmaaggiicc__cclloossee(_m_a_g_i_c___t _c_o_o_k_i_e);
+
+     _c_o_n_s_t _c_h_a_r _*
+     mmaaggiicc__eerrrroorr(_m_a_g_i_c___t _c_o_o_k_i_e);
+
+     _i_n_t
+     mmaaggiicc__eerrrrnnoo(_m_a_g_i_c___t _c_o_o_k_i_e);
+
+     _c_o_n_s_t _c_h_a_r _*
+     mmaaggiicc__ddeessccrriippttoorr(_m_a_g_i_c___t _c_o_o_k_i_e, _i_n_t _f_d);
+
+     _c_o_n_s_t _c_h_a_r _*
+     mmaaggiicc__ffiillee(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _c_h_a_r _*_f_i_l_e_n_a_m_e);
+
+     _c_o_n_s_t _c_h_a_r _*
+     mmaaggiicc__bbuuffffeerr(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _v_o_i_d _*_b_u_f_f_e_r, _s_i_z_e___t _l_e_n_g_t_h);
+
+     _i_n_t
+     mmaaggiicc__ggeettffllaaggss(_m_a_g_i_c___t _c_o_o_k_i_e);
+
+     _i_n_t
+     mmaaggiicc__sseettffllaaggss(_m_a_g_i_c___t _c_o_o_k_i_e, _i_n_t _f_l_a_g_s);
+
+     _i_n_t
+     mmaaggiicc__cchheecckk(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _c_h_a_r _*_f_i_l_e_n_a_m_e);
+
+     _i_n_t
+     mmaaggiicc__ccoommppiillee(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _c_h_a_r _*_f_i_l_e_n_a_m_e);
+
+     _i_n_t
+     mmaaggiicc__lliisstt(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _c_h_a_r _*_f_i_l_e_n_a_m_e);
+
+     _i_n_t
+     mmaaggiicc__llooaadd(_m_a_g_i_c___t _c_o_o_k_i_e, _c_o_n_s_t _c_h_a_r _*_f_i_l_e_n_a_m_e);
+
+     _i_n_t
+     mmaaggiicc__llooaadd__bbuuffffeerrss(_m_a_g_i_c___t _c_o_o_k_i_e, _v_o_i_d _*_*_b_u_f_f_e_r_s, _s_i_z_e___t _*_s_i_z_e_s,
+         _s_i_z_e___t _n_b_u_f_f_e_r_s);
+
+     _i_n_t
+     mmaaggiicc__ggeettppaarraamm(_m_a_g_i_c___t _c_o_o_k_i_e, _i_n_t _p_a_r_a_m, _v_o_i_d _*_v_a_l_u_e);
+
+     _i_n_t
+     mmaaggiicc__sseettppaarraamm(_m_a_g_i_c___t _c_o_o_k_i_e, _i_n_t _p_a_r_a_m, _c_o_n_s_t _v_o_i_d _*_v_a_l_u_e);
+
+     _i_n_t
+     mmaaggiicc__vveerrssiioonn(_v_o_i_d);
+
+DDEESSCCRRIIPPTTIIOONN
+     These functions operate on the magic database file which is described in
+     magic(5).
+
+     The function mmaaggiicc__ooppeenn() creates a magic cookie pointer and returns it.
+     It returns NULL if there was an error allocating the magic cookie.  The
+     _f_l_a_g_s argument specifies how the other magic functions should behave:
+
+     MAGIC_NONE      No special handling.
+
+     MAGIC_DEBUG     Print debugging messages to stderr.
+
+     MAGIC_SYMLINK   If the file queried is a symlink, follow it.
+
+     MAGIC_COMPRESS  If the file is compressed, unpack it and look at the con-
+                     tents.
+
+     MAGIC_DEVICES   If the file is a block or character special device, then
+                     open the device and try to look in its contents.
+
+     MAGIC_MIME_TYPE
+                     Return a MIME type string, instead of a textual descrip-
+                     tion.
+
+     MAGIC_MIME_ENCODING
+                     Return a MIME encoding, instead of a textual description.
+
+     MAGIC_MIME      A shorthand for MAGIC_MIME_TYPE | MAGIC_MIME_ENCODING.
+
+     MAGIC_CONTINUE  Return all matches, not just the first.
+
+     MAGIC_CHECK     Check the magic database for consistency and print warn-
+                     ings to stderr.
+
+     MAGIC_PRESERVE_ATIME
+                     On systems that support utime(3) or utimes(2), attempt to
+                     preserve the access time of files analysed.
+
+     MAGIC_RAW       Don't translate unprintable characters to a \ooo octal
+                     representation.
+
+     MAGIC_ERROR     Treat operating system errors while trying to open files
+                     and follow symlinks as real errors, instead of printing
+                     them in the magic buffer.
+
+     MAGIC_APPLE     Return the Apple creator and type.
+
+     MAGIC_EXTENSION
+                     Return a slash-separated list of extensions for this file
+                     type.
+
+     MAGIC_COMPRESS_TRANSP
+                     Don't report on compression, only report about the uncom-
+                     pressed data.
+
+     MAGIC_NO_CHECK_APPTYPE
+                     Don't check for EMX application type (only on EMX).
+
+     MAGIC_NO_CHECK_CDF
+                     Don't get extra information on MS Composite Document
+                     Files.
+
+     MAGIC_NO_CHECK_COMPRESS
+                     Don't look inside compressed files.
+
+     MAGIC_NO_CHECK_ELF
+                     Don't print ELF details.
+
+     MAGIC_NO_CHECK_ENCODING
+                     Don't check text encodings.
+
+     MAGIC_NO_CHECK_SOFT
+                     Don't consult magic files.
+
+     MAGIC_NO_CHECK_TAR
+                     Don't examine tar files.
+
+     MAGIC_NO_CHECK_TEXT
+                     Don't check for various types of text files.
+
+     MAGIC_NO_CHECK_TOKENS
+                     Don't look for known tokens inside ascii files.
+
+     MAGIC_NO_CHECK_JSON
+                     Don't examine JSON files.
+
+     MAGIC_NO_CHECK_CSV
+                     Don't examine CSV files.
+
+     The mmaaggiicc__cclloossee() function closes the magic(5) database and deallocates
+     any resources used.
+
+     The mmaaggiicc__eerrrroorr() function returns a textual explanation of the last
+     error, or NULL if there was no error.
+
+     The mmaaggiicc__eerrrrnnoo() function returns the last operating system error number
+     (errno(2)) that was encountered by a system call.
+
+     The mmaaggiicc__ffiillee() function returns a textual description of the contents
+     of the _f_i_l_e_n_a_m_e argument, or NULL if an error occurred.  If the _f_i_l_e_n_a_m_e
+     is NULL, then stdin is used.
+
+     The mmaaggiicc__ddeessccrriippttoorr() function returns a textual description of the con-
+     tents of the _f_d argument, or NULL if an error occurred.
+
+     The mmaaggiicc__bbuuffffeerr() function returns a textual description of the contents
+     of the _b_u_f_f_e_r argument with _l_e_n_g_t_h bytes size.
+
+     The mmaaggiicc__ggeettffllaaggss() functions returns a value representing current _f_l_a_g_s
+     set.
+
+     The mmaaggiicc__sseettffllaaggss() function sets the _f_l_a_g_s described above.  Note that
+     using both MIME flags together can also return extra information on the
+     charset.
+
+     The mmaaggiicc__cchheecckk() function can be used to check the validity of entries
+     in the colon separated database files passed in as _f_i_l_e_n_a_m_e, or NULL for
+     the default database.  It returns 0 on success and -1 on failure.
+
+     The mmaaggiicc__ccoommppiillee() function can be used to compile the colon separated
+     list of database files passed in as _f_i_l_e_n_a_m_e, or NULL for the default
+     database.  It returns 0 on success and -1 on failure.  The compiled files
+     created are named from the basename(1) of each file argument with
+     ``.mgc'' appended to it.
+
+     The mmaaggiicc__lliisstt() function dumps all magic entries in a human readable
+     format, dumping first the entries that are matched against binary files
+     and then the ones that match text files.  It takes and optional _f_i_l_e_n_a_m_e
+     argument which is a colon separated list of database files, or NULL for
+     the default database.
+
+     The mmaaggiicc__llooaadd() function must be used to load the colon separated list
+     of database files passed in as _f_i_l_e_n_a_m_e, or NULL for the default database
+     file before any magic queries can performed.
+
+     The default database file is named by the MAGIC environment variable.  If
+     that variable is not set, the default database file name is
+     /usr/local/Cellar/libmagic/5.39/share/misc/magic.  mmaaggiicc__llooaadd() adds
+     ``.mgc'' to the database filename as appropriate.
+
+     The mmaaggiicc__llooaadd__bbuuffffeerrss() function takes an array of size _n_b_u_f_f_e_r_s of
+     _b_u_f_f_e_r_s with a respective size for each in the array of _s_i_z_e_s loaded with
+     the contents of the magic databases from the filesystem.  This function
+     can be used in environment where the magic library does not have direct
+     access to the filesystem, but can access the magic database via shared
+     memory or other IPC means.
+
+     The mmaaggiicc__ggeettppaarraamm() and mmaaggiicc__sseettppaarraamm() allow getting and setting vari-
+     ous limits related to the magic library.
+
+           PPaarraammeetteerr                    TTyyppee      DDeeffaauulltt
+           MAGIC_PARAM_INDIR_MAX        size_t    15
+           MAGIC_PARAM_NAME_MAX         size_t    30
+           MAGIC_PARAM_ELF_NOTES_MAX    size_t    256
+           MAGIC_PARAM_ELF_PHNUM_MAX    size_t    128
+           MAGIC_PARAM_ELF_SHNUM_MAX    size_t    32768
+           MAGIC_PARAM_REGEX_MAX        size_t    8192
+           MAGIC_PARAM_BYTES_MAX        size_t    1048576
+
+     The MAGIC_PARAM_INDIR_RECURSION parameter controls how many levels of
+     recursion will be followed for indirect magic entries.
+
+     The MAGIC_PARAM_NAME_RECURSION parameter controls how many levels of
+     recursion will be followed for for name/use calls.
+
+     The MAGIC_PARAM_NAME_MAX parameter controls the maximum number of calls
+     for name/use.
+
+     The MAGIC_PARAM_NOTES_MAX parameter controls how many ELF notes will be
+     processed.
+
+     The MAGIC_PARAM_PHNUM_MAX parameter controls how many ELF program sec-
+     tions will be processed.
+
+     The MAGIC_PARAM_SHNUM_MAX parameter controls how many ELF sections will
+     be processed.
+
+     The mmaaggiicc__vveerrssiioonn() command returns the version number of this library
+     which is compiled into the shared library using the constant
+     MAGIC_VERSION from <_m_a_g_i_c_._h>.  This can be used by client programs to
+     verify that the version they compile against is the same as the version
+     that they run against.
+
+RREETTUURRNN VVAALLUUEESS
+     The function mmaaggiicc__ooppeenn() returns a magic cookie on success and NULL on
+     failure setting errno to an appropriate value.  It will set errno to
+     EINVAL if an unsupported value for flags was given.  The mmaaggiicc__lliisstt(),
+     mmaaggiicc__llooaadd(), mmaaggiicc__ccoommppiillee(), and mmaaggiicc__cchheecckk() functions return 0 on
+     success and -1 on failure.  The mmaaggiicc__bbuuffffeerr(), mmaaggiicc__ggeettppaatthh(), and
+     mmaaggiicc__ffiillee(), functions return a string on success and NULL on failure.
+     The mmaaggiicc__eerrrroorr() function returns a textual description of the errors of
+     the above functions, or NULL if there was no error.  The mmaaggiicc__vveerrssiioonn()
+     always returns the version number of the library.  Finally,
+     mmaaggiicc__sseettffllaaggss() returns -1 on systems that don't support utime(3), or
+     utimes(2) when MAGIC_PRESERVE_ATIME is set.
+
+FFIILLEESS
+     /usr/local/Cellar/libmagic/5.39/share/misc/magic      The non-compiled
+                                                           default magic data-
+                                                           base.
+     /usr/local/Cellar/libmagic/5.39/share/misc/magic.mgc  The compiled
+                                                           default magic data-
+                                                           base.
+
+SSEEEE AALLSSOO
+     file(1), magic(5)
+
+BBUUGGSS
+     The results from mmaaggiicc__bbuuffffeerr() and mmaaggiicc__ffiillee() where the buffer and the
+     file contain the same data can produce different results, because in the
+     mmaaggiicc__ffiillee() case, the program can lseek(2) and stat(2) the file descrip-
+     tor.
+
+AAUUTTHHOORRSS
+     Moans Rullgoard Initial libmagic implementation, and configuration.
+     Christos Zoulas API cleanup, error code and allocation handling.
+
+BSD                              June 8, 2019                              BSD
