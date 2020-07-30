@@ -142,7 +142,9 @@ def test_data_file_samples_bytes(magic):
 
     assert magic.guess_bytes(opener(pdf)) == 'application/pdf'
     assert magic.guess_bytes(opener(txt)) == 'text/plain'
-    assert magic.guess_bytes(opener(elf)) == 'application/x-sharedlib'
+    assert magic.guess_bytes(opener(elf)) == (
+        'application/x-pie-executable', 'application/x-sharedlib'
+    )
     assert magic.guess_bytes(opener(marcho)) == 'application/x-mach-binary'
 
     magic.set_flags(mime_type=False)
