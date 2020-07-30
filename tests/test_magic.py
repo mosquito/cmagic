@@ -1,4 +1,4 @@
-import os
+import asyncio
 from multiprocessing.pool import ThreadPool
 
 import pytest
@@ -50,3 +50,52 @@ def test_magic_find_thread_safe(magic):
 
     for result in pool.imap_unordered(magic.guess_bytes, [data] * 32):
         assert 'application/x-mach-binary' in result
+
+
+def test_asyncio():
+    from threading import local
+
+    magic_tls = local()
+
+    def get_instance():
+        nonlocal magic_tls
+
+        if not hasattr(magic_tls, "instance"):
+            m = Magic(mime_type=True)
+            m.load(find_db())
+            magic_tls.instance = m
+
+        return magic_tls.instance
+
+    async def guess_file(fname):
+        loop = asyncio.get_event_loop()
+
+        def run():
+            m = get_instance()
+            return m.guess_file(fname)
+
+        return await loop.run_in_executor(None, run)
+
+    async def guess_bytes(payload):
+        loop = asyncio.get_event_loop()
+
+        def run():
+            m = get_instance()
+            return m.guess_bytes(payload)
+
+        return await loop.run_in_executor(None, run)
+
+    async def run():
+        assert 'application/octet-stream' == await guess_bytes(b"\0\0\0\0\0")
+        assert 'text/plain' == await guess_bytes(b"hello")
+
+        result = await asyncio.gather(
+            *[guess_file("/etc/hosts") for _ in range(30)]
+        )
+
+        assert len(result) == 30
+        assert result == ['text/plain'] * 30
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(run())
+    loop.close()

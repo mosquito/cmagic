@@ -67,6 +67,56 @@ Usage
    # 'text/plain'
 
 
+asyncio example
++++++++++++++++
+
+.. code-block:: python
+
+   import asyncio
+   import cmagic
+   from threading import local
+
+
+   magic_tls = local()
+
+
+   def get_instance():
+       global magic_tls
+
+       if not hasattr(magic_tls, "instance"):
+           m = cmagic.Magic(mime_type=True)
+           m.load(cmagic.find_db())
+           magic_tls.instance = m
+
+       return magic_tls.instance
+
+
+   async def guess_file(fname):
+       loop = asyncio.get_event_loop()
+
+       def run():
+           m = get_instance()
+           return m.guess_file(fname)
+
+       return await loop.run_in_executor(None, run)
+
+
+   async def guess_bytes(payload):
+       loop = asyncio.get_event_loop()
+
+       def run():
+           m = get_instance()
+           return m.guess_bytes(payload)
+
+       return await loop.run_in_executor(None, run)
+
+
+   if __name__ == "__main__":
+       print(asyncio.run(guess_file("/etc/hosts")))
+       # text/plain
+       print(asyncio.run(guess_bytes(b"\0\0\0\0\0\0\0")))
+       # application/octet-stream
+
 
 Installation
 ------------

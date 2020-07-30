@@ -30,4 +30,3 @@ def find_db():
 
     __cached_db_path = candidates[0]
     return __cached_db_path
-
