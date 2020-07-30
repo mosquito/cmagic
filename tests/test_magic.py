@@ -1,5 +1,6 @@
 import asyncio
 from multiprocessing.pool import ThreadPool
+from pathlib import Path
 
 import pytest
 
@@ -99,3 +100,21 @@ def test_asyncio():
     loop = asyncio.get_event_loop()
     loop.run_until_complete(run())
     loop.close()
+
+
+DATA_FILES = Path(__file__).parent.resolve() / "data"
+
+
+def test_extensions(magic):
+    magic.set_flags(mime_type=True)
+
+    pdf = str(DATA_FILES / "libmagic.pdf")
+    txt = str(DATA_FILES / "libmagic.txt")
+    elf = str(DATA_FILES / "linux.bin")
+    marcho = str(DATA_FILES / "macos.bin")
+
+    assert magic.guess_file(pdf) == 'application/pdf'
+    assert magic.guess_file(txt) == 'text/plain'
+    assert magic.guess_file(elf) == 'application/x-pie-executable'
+    assert magic.guess_file(marcho) == 'application/x-mach-binary'
+
