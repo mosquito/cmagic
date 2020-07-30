@@ -144,9 +144,7 @@ static PyObject* Magic_load(Magic *self, PyObject *args, PyObject *kwds) {
 
     int result;
 
-    Py_BEGIN_ALLOW_THREADS;
     result = magic_load(self->cookie, db_path);
-    Py_END_ALLOW_THREADS;
 
     if (result) {
         PyErr_SetString(PyExc_RuntimeError, magic_error(self->cookie));
@@ -165,15 +163,9 @@ static PyObject* Magic_check(Magic *self, PyObject *args, PyObject *kwds) {
         args, kwds, "|s", kwlist, &db_path
     )) return NULL;
 
-    int result;
-
     if (db_path == NULL) db_path = getenv("MAGIC");
 
-    Py_BEGIN_ALLOW_THREADS;
-    result = magic_check(self->cookie, db_path);
-    Py_END_ALLOW_THREADS;
-
-    if (result) Py_RETURN_FALSE;
+    if (magic_check(self->cookie, db_path)) Py_RETURN_FALSE;
     Py_RETURN_TRUE;
 }
 
@@ -188,13 +180,7 @@ static PyObject* Magic_compile(Magic *self, PyObject *args, PyObject *kwds) {
 
     if (db_path == NULL) db_path = getenv("MAGIC");
 
-    int result;
-
-    Py_BEGIN_ALLOW_THREADS;
-    result = magic_compile(self->cookie, db_path);
-    Py_END_ALLOW_THREADS;
-
-    if (result) Py_RETURN_FALSE;
+    if (magic_compile(self->cookie, db_path)) Py_RETURN_FALSE;
     Py_RETURN_TRUE;
 }
 
@@ -208,9 +194,7 @@ static PyObject* Magic_file(Magic *self, PyObject *args, PyObject *kwds) {
 
     char * result;
 
-    Py_BEGIN_ALLOW_THREADS;
     result = magic_file(self->cookie, filename);
-    Py_END_ALLOW_THREADS;
 
     if (result == NULL) {
         PyErr_SetString(PyExc_RuntimeError, magic_error(self->cookie));
@@ -231,9 +215,7 @@ static PyObject* Magic_buffer(Magic *self, PyObject *args, PyObject *kwds) {
     )) return NULL;
 
     char * result;
-    Py_BEGIN_ALLOW_THREADS;
     result = magic_buffer(self->cookie, payload, length);
-    Py_END_ALLOW_THREADS;
 
     if (result == NULL) {
         PyErr_SetString(PyExc_RuntimeError, magic_error(self->cookie));

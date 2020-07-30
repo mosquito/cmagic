@@ -35,15 +35,36 @@ Usage
 
    import cmagic
 
+   # Database path from MAGIC environment variable
    m = cmagic.Magic()
 
-   if m.check(cmagic.MAGIC_DB):
+   if m.check():
       print("Database is ok")
 
    m.load()
 
    m.guess_file("/etc/hosts")
    # 'ASCII text'
+   m.guess_bytes("hello world")
+   # 'ASCII text'
+
+   # Setting flags
+   m.set_flags(mime_type=True)
+
+
+   m = cmagic.Magic(
+      # Setting flags here
+      mime_type=True
+   )
+
+   # Trying to find database on the standard paths
+   m.load(cmagic.find_db())
+
+   m.guess_file("/etc/hosts")
+   # 'text/plain'
+
+   m.guess_bytes("hello world")
+   # 'text/plain'
 
 
 
