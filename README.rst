@@ -150,4 +150,5 @@ MacOS
 .. code-block:: bash
 
    brew install libmagic
+   export CFLAGS="-I$(brew --prefix libmagic)/include" LDFLAGS="-L$(brew --prefix libmagic)/lib"
    python3 -m pip install cmagic
