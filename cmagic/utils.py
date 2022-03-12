@@ -22,6 +22,7 @@ def find_db():
             glob("/usr/share/misc/magic.*"),
             glob("/usr/lib/file/magic.*"),
             glob("/usr/local/Cellar/libmagic/*/share/misc/magic.mgc"),
+            glob("/opt/homebrew/Cellar/libmagic/*/share/misc/magic.mgc"),
         )
     )
 
